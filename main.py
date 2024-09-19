@@ -29,7 +29,7 @@ def run_query():
     query = """
     SELECT id, status, created_at as Data, customer_name as Nome, customer_phone_number as Celular, is_attended
     FROM public.ft_events
-    WHERE status = 'ABANDONED_CART'
+    WHERE status = 'ABANDONED_CART' OR status = 'REFUSED'
     ORDER BY created_at DESC
     """
     conn = get_connection().connect()
@@ -41,7 +41,7 @@ def run_query():
 st.title("Carrinhos Abandonados - Atualização em Tempo Real")
 
 # Exibir mensagem de recarregamento dos dados
-st.write("Os dados são recarregados a cada 10 segundos.")
+st.write("Os dados são recarregados a cada 15 segundos.")
 
 # Rodar a query e exibir os dados em tempo real
 df = run_query()
