@@ -4,6 +4,7 @@ from sqlalchemy import create_engine
 import io
 import time
 import os
+from datetime import timedelta  # Para subtrair uma
 from dotenv import load_dotenv
 
 
@@ -35,6 +36,9 @@ def run_query():
     conn = get_connection().connect()
     df = pd.read_sql(query, conn)
     conn.close()
+    
+    df['data'] = pd.to_datetime(df['data']) - timedelta(hours=1)
+
     return df
 
 # Interface do Streamlit
